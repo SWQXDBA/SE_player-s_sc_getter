@@ -17,7 +17,7 @@ public class io {
         }
         Map<String, Player> playersWithIdentity = new HashMap<>();
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
-
+//第一次遍历填写IdentityId和displayname（玩家名称）
         while (-1 != bufferedReader.read()) {
             //识别身份和玩家名 进行对应
             String str = bufferedReader.readLine();
@@ -35,6 +35,7 @@ public class io {
                 }
             }
         }
+        //第二遍根据IdentityId放入money
         bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
         while (-1 != bufferedReader.read()) {
             String str = bufferedReader.readLine();
@@ -59,6 +60,7 @@ public class io {
         //读取完毕 开始输出
         System.out.println("读取完毕!");
         System.out.println("共查找到" + playersWithIdentity.size() + "用户");
+        System.out.println("输入玩家名称获取余额");
         Map<String, Long> userMoney = new HashMap<>();
         for (Map.Entry<String, Player> entry : playersWithIdentity.entrySet()) {
             Player p = entry.getValue();
