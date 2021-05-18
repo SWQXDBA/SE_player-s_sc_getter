@@ -3,7 +3,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.Scanner;
 
-public class Assemlers {
+public class Assembler {
     private static String path = "C:\\Users\\SWQXDBA\\Desktop\\gridtest";
     private static PlayerAndMoneyGetter playerAndMoneyGetter;
 
@@ -50,10 +50,10 @@ public class Assemlers {
                     nextstr = bufferedReader.readLine();
                 }
                 if (nextstr.contains("true")) {
-                    player.SalaveAssemblerCount++;
+                    player.slaveAssemblerCount++;
                     playerAndMoneyGetter.getPlayersWithIdentity().put(identity, player);
                 }
-                player.AssemerCount++;
+                player.AssemblerCount++;
             }
 
         }
@@ -62,8 +62,8 @@ public class Assemlers {
         Map<String, Player> playerMap = playerAndMoneyGetter.getPlayerByNameMap();
         for (Map.Entry<String, Player> entry : playerMap.entrySet()) {
             Player p = entry.getValue();
-            if (p.AssemerCount != 0) {
-                f.write(p.getName() + "装配机数量" + p.AssemerCount + "\n");
+            if (p.AssemblerCount != 0) {
+                f.write(p.getName() + "装配机数量" + p.AssemblerCount + "\n");
                 f.flush();
             }
 
