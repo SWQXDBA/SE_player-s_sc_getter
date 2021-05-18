@@ -1,4 +1,5 @@
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,13 +15,13 @@ public class PlayerAndMoneyGetter {
         // path = scanner.nextLine();
         File file = new File(path);
         if (!file.isFile()) {
-            System.out.println("è·¯å¾„é”™è¯¯");
+            System.out.println("Â·¾¶´íÎó");
             return;
         }
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
-//ç¬¬ä¸€æ¬¡éå†å¡«å†™IdentityIdå’Œdisplaynameï¼ˆç©å®¶åç§°ï¼‰
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8));
+//µÚÒ»´Î±éÀúÌîĞ´IdentityIdºÍdisplayname£¨Íæ¼ÒÃû³Æ£©
         while (-1 != bufferedReader.read()) {
-            //è¯†åˆ«èº«ä»½å’Œç©å®¶å è¿›è¡Œå¯¹åº”
+            //Ê¶±ğÉí·İºÍÍæ¼ÒÃû ½øĞĞ¶ÔÓ¦
             String str = bufferedReader.readLine();
             if (-1 != str.indexOf("<IdentityId>")) {
                 Player player = new Player();
@@ -36,7 +37,7 @@ public class PlayerAndMoneyGetter {
                 }
             }
         }
-        //ç¬¬äºŒéæ ¹æ®IdentityIdæ”¾å…¥money
+        //µÚ¶ş±é¸ù¾İIdentityId·ÅÈëmoney
         bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
         while (-1 != bufferedReader.read()) {
             String str = bufferedReader.readLine();
@@ -44,26 +45,26 @@ public class PlayerAndMoneyGetter {
             if (-1 != str.indexOf("<OwnerIdentifier>")) {
                 String OwnerIdentifier = str.split(">")[1].split("</")[0];
                 Player player = playersWithIdentity.get(OwnerIdentifier);
-                //æœ‰ä¸€äº›éç©å®¶çš„èº«ä»½ æ¯”å¦‚spacepirateç­‰ä¸å­˜åœ¨é’± æ‰€ä»¥éœ€è¦è¿›è¡Œåˆ¤æ–­
+                //ÓĞÒ»Ğ©·ÇÍæ¼ÒµÄÉí·İ ±ÈÈçspacepirateµÈ²»´æÔÚÇ® ËùÒÔĞèÒª½øĞĞÅĞ¶Ï
                 if (player != null) {
-                    //å°è¯•è¯»å–balanceå­—æ®µ
+                    //³¢ÊÔ¶ÁÈ¡balance×Ö¶Î
                     str = bufferedReader.readLine();
                     if (-1 != str.indexOf("<Balance>")) {
                         String balance = str.split(">")[1].split("</")[0];
                         player.setMoney(Long.parseLong(balance));
                         playersWithIdentity.put(player.getIdentity(), player);
                     } else {
-                        System.out.println("æ‰¾ä¸åˆ°<Balance>");
+                        System.out.println("ÕÒ²»µ½<Balance>");
                     }
                 } else {
-                    System.out.println("æ‰¾ä¸åˆ°Owner!::OwnerIdentifier " + OwnerIdentifier);
+                    System.out.println("ÕÒ²»µ½Owner!::OwnerIdentifier " + OwnerIdentifier);
                 }
             }
         }
-        //è¯»å–å®Œæ¯• å¼€å§‹è¾“å‡º
-        System.out.println("è¯»å–å®Œæ¯•!");
-        System.out.println("å…±æŸ¥æ‰¾åˆ°" + playersWithIdentity.size() + "ç”¨æˆ·");
-        System.out.println("è¾“å…¥ç©å®¶åç§°è·å–ä½™é¢");
+        //¶ÁÈ¡Íê±Ï ¿ªÊ¼Êä³ö
+        System.out.println("¶ÁÈ¡Íê±Ï!");
+        System.out.println("¹²²éÕÒµ½" + playersWithIdentity.size() + "ÓÃ»§");
+        System.out.println("ÊäÈëÍæ¼ÒÃû³Æ»ñÈ¡Óà¶î");
 
         for (Map.Entry<String, Player> entry : playersWithIdentity.entrySet()) {
             Player p = entry.getValue();
@@ -76,7 +77,7 @@ public class PlayerAndMoneyGetter {
 //                no10000++;
 //            System.out.println(moneys.getKey()+"::"+moneys.getValue());
 //        }
-//        System.out.println("é»˜è®¤çš„æœ‰"+no10000+"ä¸ª");
+//        System.out.println("Ä¬ÈÏµÄÓĞ"+no10000+"¸ö");
 //        while (scanner.hasNext()) {
 //            System.out.println(userMoney.get(scanner.nextLine()));
 //        }

@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="SE_SC_Getter:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/SE_SC_Getter_jar</output-path>
+    <root id="archive" name="SE_SC_Getter.jar">
+      <element id="module-output" name="SE_SC_Getter" />
+    </root>
+  </artifact>
+</component>

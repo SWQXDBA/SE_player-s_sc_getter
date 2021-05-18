@@ -1,7 +1,5 @@
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -11,7 +9,7 @@ public class Assemlers {
 
     static {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("è¯·è¾“å…¥å·¥ä½œè·¯å¾„");
+        System.out.println("ÇëÊäÈë¹¤×÷Â·¾¶");
         path = scanner.nextLine();
     }
 
@@ -25,9 +23,14 @@ public class Assemlers {
 
 
     public static void main(String[] args) throws IOException {
+        File output = new File("assms.txt");
+        output.createNewFile();
+        FileWriter f = new FileWriter(output);
+        BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(output), StandardCharsets.UTF_8));
+
         File file = new File(path + "\\SANDBOX_0_0_0_.sbs");
-        BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
-        System.out.println("è£…é…æœºæ£€æµ‹å¼€å§‹è¿è¡Œ");
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8));
+        System.out.println("×°Åä»ú¼ì²â¿ªÊ¼ÔËĞĞ");
         while (bufferedReader.read() != -1) {
             String str = bufferedReader.readLine();
             if (str.contains("MyObjectBuilder_Assembler")) {
@@ -40,7 +43,7 @@ public class Assemlers {
                 Player player = playerAndMoneyGetter.getByIdentity(identity);
 
                 if (player == null) {
-                    System.out.println("æ‰¾ä¸åˆ°ç½‘æ ¼æ‰€æœ‰è€…player::" + identity);
+                    System.out.println("ÕÒ²»µ½Íø¸ñËùÓĞÕßplayer::" + identity);
                     break;
                 }
                 while (!nextstr.contains("<SlaveEnabled>")) {
@@ -54,20 +57,24 @@ public class Assemlers {
             }
 
         }
-        System.out.println("è£…é…æœºæ£€æµ‹ç»“æŸ");
+        System.out.println("×°Åä»ú¼ì²â½áÊø");
 
         Map<String, Player> playerMap = playerAndMoneyGetter.getPlayerByNameMap();
         for (Map.Entry<String, Player> entry : playerMap.entrySet()) {
             Player p = entry.getValue();
-            if (p.AssemerCount != 0)
-                System.out.println(p.getName() + "è£…é…æœºæ•°é‡" + p.AssemerCount);
+            if (p.AssemerCount != 0) {
+                f.write(p.getName() + "×°Åä»úÊıÁ¿" + p.AssemerCount + "\n");
+                f.flush();
+            }
+
         }
 
 
         for (Map.Entry<String, Player> entry : playerMap.entrySet()) {
             Player p = entry.getValue();
             if (p.getSalaveAssemblerCount() != 0) {
-                System.out.println(p.getName() + "::" + p.getSalaveAssemblerCount());
+                f.write(p.getName() + "::" + p.getSalaveAssemblerCount() + "\n");
+                f.flush();
             }
         }
 
