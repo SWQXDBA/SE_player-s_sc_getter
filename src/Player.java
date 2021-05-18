@@ -2,6 +2,17 @@ public class Player {
     private String name;
     private long money;
     private String identity;
+    public int SalaveAssemblerCount;
+    public int AssemerCount;
+
+    public int getSalaveAssemblerCount() {
+        return SalaveAssemblerCount;
+    }
+
+    public void setSalaveAssemblerCount(int salaveAssemblerCount) {
+        SalaveAssemblerCount = salaveAssemblerCount;
+    }
+
 
     public String getName() {
         return name;
