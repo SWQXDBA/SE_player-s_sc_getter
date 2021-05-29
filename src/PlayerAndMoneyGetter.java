@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class PlayerAndMoneyGetter {
-    private String path;
+    private String path = "C:\\Users\\SWQXDBA\\Desktop";
 
     private Map<String, Player> playersWithIdentity = new HashMap<>();
     private Map<String, Long> userMoney = new HashMap<>();
