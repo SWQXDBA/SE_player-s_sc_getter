@@ -20,15 +20,16 @@ public class PlayerAndMoneyGetter {
         }
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8));
 //第一次遍历填写IdentityId和displayname（玩家名称）
-        while (-1 != bufferedReader.read()) {
+        String str;
+        while ((str = bufferedReader.readLine()) != null) {
             //识别身份和玩家名 进行对应
-            String str = bufferedReader.readLine();
-            if (-1 != str.indexOf("<IdentityId>")) {
+
+            if (str.contains("<IdentityId>")) {
                 Player player = new Player();
                 String IdentityId = str.split(">")[1].split("</")[0];
 
                 str = bufferedReader.readLine();
-                if (-1 != str.indexOf("<DisplayName>")) {
+                if (str.contains("<DisplayName>")) {
 
                     String DisplayName = str.split(">")[1].split("</")[0];
                     player.setIdentity(IdentityId);
@@ -39,17 +40,17 @@ public class PlayerAndMoneyGetter {
         }
         //第二遍根据IdentityId放入money
         bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
-        while (-1 != bufferedReader.read()) {
-            String str = bufferedReader.readLine();
+        while ((str = bufferedReader.readLine()) != null) {
 
-            if (-1 != str.indexOf("<OwnerIdentifier>")) {
+
+            if (str.contains("<OwnerIdentifier>")) {
                 String OwnerIdentifier = str.split(">")[1].split("</")[0];
                 Player player = playersWithIdentity.get(OwnerIdentifier);
                 //有一些非玩家的身份 比如spacepirate等不存在钱 所以需要进行判断
                 if (player != null) {
                     //尝试读取balance字段
                     str = bufferedReader.readLine();
-                    if (-1 != str.indexOf("<Balance>")) {
+                    if (str.contains("<Balance>")) {
                         String balance = str.split(">")[1].split("</")[0];
                         player.setMoney(Long.parseLong(balance));
                         playersWithIdentity.put(player.getIdentity(), player);

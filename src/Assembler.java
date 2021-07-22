@@ -31,8 +31,9 @@ public class Assembler {
         File file = new File(path + "\\SANDBOX_0_0_0_.sbs");
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8));
         System.out.println("装配机检测开始运行");
-        while (bufferedReader.read() != -1) {
-            String str = bufferedReader.readLine();
+        String str;
+        while ((str = bufferedReader.readLine()) != null) {
+
             if (str.contains("MyObjectBuilder_Assembler")) {
                 String nextstr = bufferedReader.readLine();
                 while (!nextstr.contains("<Owner>")) {
