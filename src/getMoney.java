@@ -21,7 +21,7 @@ public class getMoney {
                 String str = scanner.nextLine();
                 Map<String, Long> moneys = p.getUserMoney();
                 for (Map.Entry<String, Long> m : moneys.entrySet()) {
-                    if (m.getKey().contains(str))
+                    if (m.getKey().toUpperCase().contains(str.toUpperCase()))
                         System.out.println(m.getKey() + "::" + m.getValue());
                 }
             }

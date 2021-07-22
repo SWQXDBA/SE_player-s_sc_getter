@@ -55,10 +55,10 @@ public class PlayerAndMoneyGetter {
                         player.setMoney(Long.parseLong(balance));
                         playersWithIdentity.put(player.getIdentity(), player);
                     } else {
-                        System.out.println("找不到<Balance>");
+                    //    System.out.println("找不到<Balance>");
                     }
                 } else {
-                    System.out.println("找不到Owner!::OwnerIdentifier " + OwnerIdentifier);
+                    //     System.out.println("找不到Owner!::OwnerIdentifier " + OwnerIdentifier);
                 }
             }
         }
@@ -69,6 +69,9 @@ public class PlayerAndMoneyGetter {
 
         for (Map.Entry<String, Player> entry : playersWithIdentity.entrySet()) {
             Player p = entry.getValue();
+            if (userMoney.containsKey(p.getName())) {
+                System.out.println("重名了！！！" + p.getName());
+            }
             userMoney.put(p.getName(), p.getMoney());
         }
         bufferedReader.close();
